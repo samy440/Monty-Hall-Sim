@@ -1,4 +1,16 @@
-# Add description
+# Description
+# This script generates two temporary data files corresponding to
+# the switch/stay strategies. These files (MPHSim_temp_stay/switch.csv)
+# contain the outcome, final door pick, and car door for each iteration
+# according to the following format and type:
+# [outcome = boolean], [final door pick = int {0,1,2}], [car door = int {0,1,2}].
+# 
+# generator.py is meant to be called by the main.py script. 
+#
+# Future work:  add a stats-compiling function and output file,
+#               allow for a random strategy (randomly choose to switch or stay)
+#               add a parameter representing the number of doors such that there
+#               are >= 3 doors to choose from (but still only one car).
 
 from random import randint
 
