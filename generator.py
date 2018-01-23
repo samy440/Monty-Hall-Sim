@@ -24,7 +24,7 @@ def generator(n):
 
     #MHPSim_temp_stay = open("MHPSim_temp_stay.csv", "w")
     #MHPSim_temp_switch = open("MHPSim_temp_switch.csv", "w")
-    #MHPSim_success_tally = open("MHPSim_success_tally.csv","w")
+    MHPSim_success_tally = open("MHPSim_success_tally.csv","w")
     # open a stats file?
     
 
@@ -35,8 +35,14 @@ def generator(n):
     stayed_outcome = [ 0 for i in range(n) ]
     stayed_outcome_tally = 0.0
     switched_outcome_tally = 0.0
+
+    car_door_distribution = [0,0,0]
+
     for iter in range(0,n):
         total_iterations_so_far = (iter + 1)
+
+        car_door_distribution[car_location_list[iter]] += 1
+
         revealable_doors = [ x for x in [0,1,2] if ((x != car_location_list[iter]) and (x != initial_guess_list[iter])) ]
         monty_reveals = randint(0,(len(revealable_doors)-1))
         switched_guess_list.append( [ y for y in [0,1,2] if ((y != revealable_doors[monty_reveals]) and (y != initial_guess_list[iter]))] )
@@ -56,14 +62,15 @@ def generator(n):
             stayed_outcome_tally /= total_iterations_so_far
         #MHPSim_temp_stay.write('\n' + str(stayed_outcome[iter]) + "," + str(initial_guess_list[iter]) + "," + str(car_location_list[iter]))
         #MHPSim_temp_switch.write('\n' + str(switched_outcome[iter]) + "," + str(switched_guess_list[iter]) + "," + str(car_location_list[iter]))
-        #MHPSim_success_tally.write('\n' + str(stayed_outcome_tally) + "," + str(switched_outcome_tally))
+        MHPSim_success_tally.write('\n' + str(stayed_outcome_tally) + "," + str(switched_outcome_tally))
     #MHPSim_temp_stay.close()
     #MHPSim_temp_switch.close()
-    #MHPSim_success_tally.close()
-    display(n)
+    MHPSim_success_tally.close()
+    print(car_door_distribution)
+    display(n, car_door_distribution)
 
-def display(n):
-    fig = plt.figure()
+def display(n, door_frequencies):
+    fig = plt.figure(1)
     plot_data = open("MHPSim_success_tally.csv","r").read()
     datapoints = plot_data.split('\n')
     stayed_ys = []
@@ -75,6 +82,15 @@ def display(n):
     plt.plot(stayed_ys, 'b-')
     plt.plot(switched_ys, 'g-')
     plt.show()
+
+
+    x_axis_bar_graph = ("Door #1", "Door #2", "Door #3")
+    x_axis_bar_graph_values = [0,1,2]
+    plt.bar(x_axis_bar_graph_values, door_frequencies, align='center', alpha=0.5)
+    plt.ylabel('Frequency')
+    plt.title('Frequency of Having the Car Behind Every Door')
+    plt.show()
+    
 
 if __name__ == '__main__':
     generator()
