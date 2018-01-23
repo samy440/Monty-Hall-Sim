@@ -22,10 +22,11 @@ style.use('fivethirtyeight')
 
 def generator(n):
 
-    MHPSim_temp_stay = open("MHPSim_temp_stay.csv", "w")
-    MHPSim_temp_switch = open("MHPSim_temp_switch.csv", "w")
-    MHPSim_success_tally = open("MHPSim_success_tally.csv","w")
+    #MHPSim_temp_stay = open("MHPSim_temp_stay.csv", "w")
+    #MHPSim_temp_switch = open("MHPSim_temp_switch.csv", "w")
+    #MHPSim_success_tally = open("MHPSim_success_tally.csv","w")
     # open a stats file?
+    
 
     car_location_list = [ randint(0,2) for i in range(n) ]
     initial_guess_list = [ randint(0,2) for i in range(n) ]
@@ -53,12 +54,12 @@ def generator(n):
             switched_outcome_tally /= total_iterations_so_far
             stayed_outcome_tally *= iter
             stayed_outcome_tally /= total_iterations_so_far
-        MHPSim_temp_stay.write('\n' + str(stayed_outcome[iter]) + "," + str(initial_guess_list[iter]) + "," + str(car_location_list[iter]))
-        MHPSim_temp_switch.write('\n' + str(switched_outcome[iter]) + "," + str(switched_guess_list[iter]) + "," + str(car_location_list[iter]))
-        MHPSim_success_tally.write('\n' + str(stayed_outcome_tally) + "," + str(switched_outcome_tally))
-    MHPSim_temp_stay.close()
-    MHPSim_temp_switch.close()
-    MHPSim_success_tally.close()
+        #MHPSim_temp_stay.write('\n' + str(stayed_outcome[iter]) + "," + str(initial_guess_list[iter]) + "," + str(car_location_list[iter]))
+        #MHPSim_temp_switch.write('\n' + str(switched_outcome[iter]) + "," + str(switched_guess_list[iter]) + "," + str(car_location_list[iter]))
+        #MHPSim_success_tally.write('\n' + str(stayed_outcome_tally) + "," + str(switched_outcome_tally))
+    #MHPSim_temp_stay.close()
+    #MHPSim_temp_switch.close()
+    #MHPSim_success_tally.close()
     display(n)
 
 def display(n):
