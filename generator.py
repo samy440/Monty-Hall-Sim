@@ -35,16 +35,24 @@ def generator(n):
     stayed_outcome_tally = 0.0
     switched_outcome_tally = 0.0
     for iter in range(0,n):
-        outcome = 0
+        total_iterations_so_far = (iter + 1)
         revealable_doors = [ x for x in [0,1,2] if ((x != car_location_list[iter]) and (x != initial_guess_list[iter])) ]
         monty_reveals = randint(0,(len(revealable_doors)-1))
         switched_guess_list.append( [ y for y in [0,1,2] if ((y != revealable_doors[monty_reveals]) and (y != initial_guess_list[iter]))] )
         if initial_guess_list[iter] == car_location_list[iter]:
             stayed_outcome[iter] = 1
-            stayed_outcome_tally += (1.0/n)
+            stayed_outcome_tally *= iter
+            stayed_outcome_tally += 1.0
+            stayed_outcome_tally /= total_iterations_so_far
+            switched_outcome_tally *= iter
+            switched_outcome_tally /= total_iterations_so_far
         if switched_guess_list[iter][0] == car_location_list[iter]:
             switched_outcome[iter] = 1
-            switched_outcome_tally += (1.0/n)
+            switched_outcome_tally *= iter
+            switched_outcome_tally += 1.0
+            switched_outcome_tally /= total_iterations_so_far
+            stayed_outcome_tally *= iter
+            stayed_outcome_tally /= total_iterations_so_far
         MHPSim_temp_stay.write('\n' + str(stayed_outcome[iter]) + "," + str(initial_guess_list[iter]) + "," + str(car_location_list[iter]))
         MHPSim_temp_switch.write('\n' + str(switched_outcome[iter]) + "," + str(switched_guess_list[iter]) + "," + str(car_location_list[iter]))
         MHPSim_success_tally.write('\n' + str(stayed_outcome_tally) + "," + str(switched_outcome_tally))
