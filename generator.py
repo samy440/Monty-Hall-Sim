@@ -70,6 +70,8 @@ def generator(n):
     display(n, car_door_distribution)
 
 def display(n, door_frequencies):
+    for df in range(0,len(door_frequencies)):
+        door_frequencies[df] /= n
     fig = plt.figure(1)
     plot_data = open("MHPSim_success_tally.csv","r").read()
     datapoints = plot_data.split('\n')
