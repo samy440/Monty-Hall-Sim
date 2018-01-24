@@ -72,7 +72,11 @@ def generator(n):
 def display(n, door_frequencies):
     for df in range(0,len(door_frequencies)):
         door_frequencies[df] /= n
+<<<<<<< HEAD
     fig = plt.figure(1)
+=======
+
+>>>>>>> development
     plot_data = open("MHPSim_success_tally.csv","r").read()
     datapoints = plot_data.split('\n')
     stayed_ys = []
@@ -81,16 +85,21 @@ def display(n, door_frequencies):
         stayed_y, switched_y = line.split(',')
         stayed_ys.append(stayed_y)
         switched_ys.append(switched_y)
-    plt.plot(stayed_ys, 'b-')
-    plt.plot(switched_ys, 'g-')
-    plt.show()
+
+    fig = plt.figure()
+    figA = plt.subplot2grid((1,7), (0,0), rowspan=1, colspan=4)
+    figB = plt.subplot2grid((1,7), (0,5), rowspan=1, colspan=2)
+
+    figA.plot(stayed_ys, 'b-')
+    
+    figA.plot(switched_ys, 'g-')
+    
 
 
     x_axis_bar_graph = ("Door #1", "Door #2", "Door #3")
     x_axis_bar_graph_values = [0,1,2]
-    plt.bar(x_axis_bar_graph_values, door_frequencies, align='center', alpha=0.5)
-    plt.ylabel('Frequency')
-    plt.title('Frequency of Having the Car Behind Every Door')
+    figB.bar(x_axis_bar_graph_values, door_frequencies, align='center', alpha=0.5)
+    
     plt.show()
     
 
