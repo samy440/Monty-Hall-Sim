@@ -75,11 +75,8 @@ def display(n, door_frequencies, stayed_outcome_list, switched_outcome_list):
     figA = plt.subplot2grid((1,7), (0,0), rowspan=1, colspan=4)
     figB = plt.subplot2grid((1,7), (0,5), rowspan=1, colspan=2)
 
-    figA.plot(stayed_outcome_list, 'b-')
-
-    figA.plot(switched_outcome_list, 'g-')
-    
-
+    figA.scatter([x for x in range(n)], stayed_outcome_list)
+    figA.scatter([x for x in range(n)], switched_outcome_list)
 
     x_axis_bar_graph = ("Door #1", "Door #2", "Door #3")
     x_axis_bar_graph_values = [0,1,2]
