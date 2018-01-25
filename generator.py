@@ -13,20 +13,11 @@
 #               are >= 3 doors to choose from (but still only one car).
 
 from random import randint
-
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 from matplotlib import style
 style.use('fivethirtyeight')
 
-
-def generator(n):
-
-    #MHPSim_temp_stay = open("MHPSim_temp_stay.csv", "w")
-    #MHPSim_temp_switch = open("MHPSim_temp_switch.csv", "w")
-    MHPSim_success_tally = open("MHPSim_success_tally.csv","w")
-    # open a stats file?
-    
+def generator(n, createFile):
 
     car_location_list = [ randint(0,2) for i in range(n) ]
     initial_guess_list = [ randint(0,2) for i in range(n) ]
@@ -34,8 +25,9 @@ def generator(n):
     switched_outcome = [ 0 for i in range(n) ]
     stayed_outcome = [ 0 for i in range(n) ]
     stayed_outcome_tally = 0.0
+    stayed_outcome_tally_list = [ ]
     switched_outcome_tally = 0.0
-
+    switched_outcome_tally_list = [ ]
     car_door_distribution = [0,0,0]
 
     for iter in range(0,n):
@@ -51,24 +43,28 @@ def generator(n):
             stayed_outcome_tally *= iter
             stayed_outcome_tally += 1.0
             stayed_outcome_tally /= total_iterations_so_far
+            stayed_outcome_tally_list.append(stayed_outcome_tally)
             switched_outcome_tally *= iter
             switched_outcome_tally /= total_iterations_so_far
+            switched_outcome_tally_list.append(switched_outcome_tally)
         if switched_guess_list[iter][0] == car_location_list[iter]:
             switched_outcome[iter] = 1
             switched_outcome_tally *= iter
             switched_outcome_tally += 1.0
             switched_outcome_tally /= total_iterations_so_far
+            switched_outcome_tally_list.append(switched_outcome_tally)
             stayed_outcome_tally *= iter
             stayed_outcome_tally /= total_iterations_so_far
-        #MHPSim_temp_stay.write('\n' + str(stayed_outcome[iter]) + "," + str(initial_guess_list[iter]) + "," + str(car_location_list[iter]))
-        #MHPSim_temp_switch.write('\n' + str(switched_outcome[iter]) + "," + str(switched_guess_list[iter]) + "," + str(car_location_list[iter]))
-        MHPSim_success_tally.write('\n' + str(stayed_outcome_tally) + "," + str(switched_outcome_tally))
-    #MHPSim_temp_stay.close()
-    #MHPSim_temp_switch.close()
-    MHPSim_success_tally.close()
-    print(car_door_distribution)
-    display(n, car_door_distribution)
+            stayed_outcome_tally_list.append(stayed_outcome_tally)
+    
+    if createFile:
+        MHPSim_record = open("MHPSim_record.csv","w")
+        MHPSim_record.write("[Simulation Number],[Car Location (1/2/3)],[Initial Guess (1/2/3)],[Switch Guess (1/2/3)],[Stayed Outcome (1/0)],[Switched Outcome (1/0)]\n")
+        for x in range(0,len(car_location_list)):
+            MHPSim_record.write(str(x+1) + "," + str((car_location_list[x])+1) + "," + str((initial_guess_list[x])+1) + "," + str((switched_guess_list[x][0])+1) + "," + str(stayed_outcome[x]+1) + "," + str(switched_outcome[x]+1) + "\n")
+        MHPSim_record.close()
 
+<<<<<<< HEAD
 def display(n, door_frequencies):
     for df in range(0,len(door_frequencies)):
         door_frequencies[df] /= n
@@ -85,23 +81,28 @@ def display(n, door_frequencies):
         stayed_y, switched_y = line.split(',')
         stayed_ys.append(stayed_y)
         switched_ys.append(switched_y)
+=======
 
+    display(n, car_door_distribution, stayed_outcome_tally_list, switched_outcome_tally_list)
+>>>>>>> development
+
+def display(n, door_frequencies, stayed_outcome_list, switched_outcome_list):
+    for df in range(0,len(door_frequencies)):
+        door_frequencies[df] /= n
+    
     fig = plt.figure()
     figA = plt.subplot2grid((1,7), (0,0), rowspan=1, colspan=4)
     figB = plt.subplot2grid((1,7), (0,5), rowspan=1, colspan=2)
 
-    figA.plot(stayed_ys, 'b-')
-    
-    figA.plot(switched_ys, 'g-')
-    
+    figA.plot(stayed_outcome_list, 'b-')
 
-
+    figA.plot(switched_outcome_list, 'g-')
+    
     x_axis_bar_graph = ("Door #1", "Door #2", "Door #3")
     x_axis_bar_graph_values = [0,1,2]
     figB.bar(x_axis_bar_graph_values, door_frequencies, align='center', alpha=0.5)
     
     plt.show()
     
-
 if __name__ == '__main__':
     generator()
