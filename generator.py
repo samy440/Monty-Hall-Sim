@@ -64,27 +64,8 @@ def generator(n, createFile):
             MHPSim_record.write(str(x+1) + "," + str((car_location_list[x])+1) + "," + str((initial_guess_list[x])+1) + "," + str((switched_guess_list[x][0])+1) + "," + str(stayed_outcome[x]+1) + "," + str(switched_outcome[x]+1) + "\n")
         MHPSim_record.close()
 
-<<<<<<< HEAD
-def display(n, door_frequencies):
-    for df in range(0,len(door_frequencies)):
-        door_frequencies[df] /= n
-<<<<<<< HEAD
-    fig = plt.figure(1)
-=======
-
->>>>>>> development
-    plot_data = open("MHPSim_success_tally.csv","r").read()
-    datapoints = plot_data.split('\n')
-    stayed_ys = []
-    switched_ys = []
-    for line in datapoints[1:]:
-        stayed_y, switched_y = line.split(',')
-        stayed_ys.append(stayed_y)
-        switched_ys.append(switched_y)
-=======
 
     display(n, car_door_distribution, stayed_outcome_tally_list, switched_outcome_tally_list)
->>>>>>> development
 
 def display(n, door_frequencies, stayed_outcome_list, switched_outcome_list):
     for df in range(0,len(door_frequencies)):
