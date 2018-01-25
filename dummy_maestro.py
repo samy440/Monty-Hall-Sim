@@ -9,7 +9,7 @@ def main():
         print("You have entered a " + str(type(input_number_of_iterations)) + ".\n")
         input_number_of_iterations = input("Please input the number of simulations to run:  ")
     
-    generator.generator(int(input_number_of_iterations), False)
+    generator.generator(int(input_number_of_iterations), True)
     print("Done")
 
 if __name__ == '__main__':
