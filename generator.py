@@ -79,6 +79,8 @@ def display(n, door_frequencies, stayed_outcome_list, switched_outcome_list):
 
     figA.plot(switched_outcome_list, 'g-')
     
+
+
     x_axis_bar_graph = ("Door #1", "Door #2", "Door #3")
     x_axis_bar_graph_values = [0,1,2]
     figB.bar(x_axis_bar_graph_values, door_frequencies, align='center', alpha=0.5)
