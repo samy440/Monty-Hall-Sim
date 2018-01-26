@@ -23,8 +23,17 @@ style.use('fivethirtyeight')
 def generator(n, createFile):
     plt.ion()
     fig = plt.figure()
+    mng = plt.get_current_fig_manager()
+    mng.resize(*mng.window.maxsize())
     figA = plt.subplot2grid((1,7), (0,0), rowspan=1, colspan=4)
+    figA.set_title("Outcome of\nSimulations")
+    figA.set_xlabel("Number of Simulations")
+    figA.set_ylabel("Rate of Success\n(Ending the Simulation with a Car)")
+
     figB = plt.subplot2grid((1,7), (0,5), rowspan=1, colspan=2)
+    figB.set_title("Distribution of Car Location")
+    figB.set_xlabel("Door Number")
+    figB.set_ylabel("Frequency of Holding Car")
     plt.ylim([0.0, 1.0])
     x_axis_bar_graph = ("Door #1", "Door #2", "Door #3")
     x_axis_bar_graph_values = [1,2,3]
@@ -76,7 +85,7 @@ def generator(n, createFile):
             stayed_outcome_tally_list.append(stayed_outcome_tally)
         figA.scatter(total_iterations_so_far, stayed_outcome_tally_list[iter], color='red')
         figA.scatter(total_iterations_so_far, switched_outcome_tally_list[iter], color='blue')
-        plt.pause(0.01)
+        plt.pause(0.005)
     if createFile:
         MHPSim_record = open("MHPSim_record.csv","w")
         MHPSim_record.write("[Simulation Number],[Car Location (1/2/3)],[Initial Guess (1/2/3)],[Switch Guess (1/2/3)],[Stayed Outcome (1/0)],[Switched Outcome (1/0)]\n")
