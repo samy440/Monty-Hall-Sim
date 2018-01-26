@@ -26,12 +26,12 @@ def generator(n, createFile):
     mng = plt.get_current_fig_manager()
     mng.resize(*mng.window.maxsize())
     figA = plt.subplot2grid((1,7), (0,0), rowspan=1, colspan=4)
-    figA.set_title("Outcome of\nSimulations")
+    figA.set_title("Outcome of Simulations\n")
     figA.set_xlabel("Number of Simulations")
     figA.set_ylabel("Rate of Success\n(Ending the Simulation with a Car)")
 
     figB = plt.subplot2grid((1,7), (0,5), rowspan=1, colspan=2)
-    figB.set_title("Distribution of Car Location")
+    figB.set_title("Distribution of Car Location\n")
     figB.set_xlabel("Door Number")
     figB.set_ylabel("Frequency of Holding Car")
     plt.ylim([0.0, 1.0])
@@ -61,7 +61,6 @@ def generator(n, createFile):
             rect.set_height(h)
         fig.canvas.draw()
 
-
         revealable_doors = [ x for x in [0,1,2] if ((x != car_location_list[iter]) and (x != initial_guess_list[iter])) ]
         monty_reveals = randint(0,(len(revealable_doors)-1))
         switched_guess_list.append( [ y for y in [0,1,2] if ((y != revealable_doors[monty_reveals]) and (y != initial_guess_list[iter]))] )
@@ -85,7 +84,13 @@ def generator(n, createFile):
             stayed_outcome_tally_list.append(stayed_outcome_tally)
         figA.scatter(total_iterations_so_far, stayed_outcome_tally_list[iter], color='red')
         figA.scatter(total_iterations_so_far, switched_outcome_tally_list[iter], color='blue')
+        
+
         plt.pause(0.005)
+    figA.plot([ x for x in range(1, (n+1))], stayed_outcome_tally_list, color='red', label='Always Stay')
+    figA.plot([ x for x in range(1, (n+1))], switched_outcome_tally_list, color='blue', label='Always Switch')
+    figA.legend(loc='best')
+    plt.pause(10)
     if createFile:
         MHPSim_record = open("MHPSim_record.csv","w")
         MHPSim_record.write("[Simulation Number],[Car Location (1/2/3)],[Initial Guess (1/2/3)],[Switch Guess (1/2/3)],[Stayed Outcome (1/0)],[Switched Outcome (1/0)]\n")
