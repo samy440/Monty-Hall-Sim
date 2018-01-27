@@ -12,7 +12,7 @@ def main():
         print("You have entered a " + str(type(input_number_of_iterations)) + ".\n")
         input_number_of_iterations = input("Please input the number of simulations to run (or q to quit):  ")
         valid_input = intInput(input_number_of_iterations)
-    generator.generator(valid_input, True)
+    generator.generator(valid_input, False)
     print("Done")
 
 def intInput(inp):
