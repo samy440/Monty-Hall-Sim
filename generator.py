@@ -40,7 +40,7 @@ def generator(n, createFile):
     rects = figB.bar(x_axis_bar_graph_values, car_door_distribution_at_sim, align='center', alpha=0.5)
 
     for sim in range(0, n):
-        total_iterations_so_far = (sim+ 1) 
+        total_iterations_so_far = (sim + 1) 
 
         car_door_distribution[car_location_list[sim]] += (1.0/n)*100
         car_door_distribution_at_sim = np.array(car_door_distribution)
@@ -71,7 +71,7 @@ def generator(n, createFile):
             stayed_outcome_tally_list.append(stayed_outcome_tally)
         figA.scatter(total_iterations_so_far, stayed_outcome_tally_list[sim]*100, color='red')
         figA.scatter(total_iterations_so_far, switched_outcome_tally_list[sim]*100, color='blue')
-        plt.pause(0.005)
+        # plt.pause(0.005)
 
     figA.plot([ x for x in range(1, (n+1))], [ (y*100) for y in stayed_outcome_tally_list ], color='red', label='Always Stay')
     figA.plot([ x for x in range(1, (n+1))], [ (y*100) for y in switched_outcome_tally_list ], color='blue', label='Always Switch')
