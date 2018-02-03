@@ -32,7 +32,9 @@ generator.py
         switched_outcome_tally holds the cumulative success rate of the "switch" strategy over all simulations completed this far.
         switched_outcome_tally_list is a list of n-elements containing the n successive values of stayed_outcome_tally in order (is used to generate the scatter plot).
         car_door_distribution is a list of 3 real numbers representing the cumulative frequency of having the car behind each of the three doors over the n simulations.
-
+        revealable_doors is a list of n integers representing which door(s) Monty CAN reveal at each simulation.
+            Monty can only reveal doors that A) the player hasn't chosen as their initial guess, and B) do not have the car.
+        monty_reveals represents the door that Monty reveals.
 
 
 
