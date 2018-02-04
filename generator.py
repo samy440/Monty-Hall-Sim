@@ -1,4 +1,5 @@
 # import block
+import tkinter
 from random import randint
 import matplotlib
 matplotlib.use('TKAgg')
