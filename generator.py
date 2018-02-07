@@ -25,16 +25,27 @@ def generator(n, createFile):
     figB.set_ylabel("Frequency of Car Location Over " + str(n) + " Simulations (%)")
     plt.ylim([0.0, 100.0])
     x_axis_bar_graph_values = [1, 2, 3]
-    # put this in a for-loop from 1 to number_of_players
+    # START OF FOR-LOOP FROM (0:NUMBER_OF_PLAYERS)
+    # Note: max number of players = 10, and this will be controlled at the input phase
+    # car_location_list will stay the same for all simulations
     car_location_list = [ randint(0, 2) for i in range(n) ] # a list of n integers randomly chosen between [0, 1, 2] representing which door has the car
+    # initial_guess_master_list will be a list of initial_guess_lists, with the ith sublist belonging to the ith player
     initial_guess_list = [ randint(0, 2) for i in range(n) ]    # a list of n integers randomly chosen between [0, 1, 2] representing the contestant's initial door-pick
+    # switched_guess_master_list will be a list of switched_guess_lists, with the ith sublist belonging to the ith player
     switched_guess_list = [ ]   # a list which will be populated to contain the n integers representing the contestant's switched door-pick
+    # switched_outcome_master_list will be a list of switched_outcome lists, with the ith sublist belonging to the ith player
     switched_outcome = [ 0 for i in range(n) ]  # a list which will be updated to contain the outcome (car/no car == 1/0) of switching the door-pick in the current simulation
+    # stayed_outcome_master_list will be a list of stayed_outcome lists, with the ith sublist belonging to the ith player
     stayed_outcome = [ 0 for i in range(n) ]    # a list which will be updated to contain the outcome (car/no car == 1/0) of staying with the original door-pick in the current simulation
+    # stayed_outcome_tally_master_list will be a list of stayed_outcome_tallys, with the ith element belonging to the ith player
     stayed_outcome_tally = 0.0
+    # stayed_outcome_tallies_master_list will be a list of stayed_outcome_tally_lists, with the ith sublist belonging to the ith player
     stayed_outcome_tally_list = [ ]
+    # switched_outcome_tally_master_list will be a list of switched_outcome_tallys, with the ith element belonging to the ith player
     switched_outcome_tally = 0.0
+    # switched_outcome_tallies_master_list will be a list of switched_outcome_tally_lists, with the ith sublist belonging to the ith player
     switched_outcome_tally_list = [ ]
+    # the car_door_distribution and car_door_distribution_at_sim do not need to change
     car_door_distribution = [0, 0, 0]   # a list representing the distribution of the supposedly random selection of door containing the car
     car_door_distribution_at_sim = np.array(car_door_distribution)
         
