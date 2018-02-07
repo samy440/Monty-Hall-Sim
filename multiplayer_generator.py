@@ -4,7 +4,7 @@ import matplotlib
 matplotlib.use('TKAgg')
 import matplotlib.pyplot as plt
 from matplotlib import style
-style.use('fivethirtyeight')
+style.use('seaborn-darkgrid')
 import numpy as np
 
 def multiplayer_generator(n, players, createFile):
@@ -22,10 +22,10 @@ def multiplayer_generator(n, players, createFile):
     figA.set_title("Outcome of Simulations\n")
     figA.set_xlabel("Number of Simulations")
     figA.set_ylabel("Cummulative  Success Rate (%)\n(Ending the Simulation with a Car)")
-    colours_for_figA = ['red','orange','yellow','green','blue','brown','purple','grey','black']
+    colours_for_figA = ['red','orange','yellow','green','blue','black','purple','grey','brown']
     labels_list_for_figA = []
     for i in range(0,len(players)):
-        labels_list_for_figA.append("Players switching " + str(players[i]) + str('%') + " of time")
+        labels_list_for_figA.append("Player switching " + str(players[i]) + str('%') + " of time")
 
 
     figB = plt.subplot2grid((1, 7), (0, 5), rowspan=1, colspan=2)   # figB is the door distribution plot
@@ -50,7 +50,6 @@ def multiplayer_generator(n, players, createFile):
         success_rate_master_list.append([])
         revealable_doors_master_list.append([])
     rects = figB.bar(x_axis_bar_graph_values, car_door_distribution_at_sim, align='center', alpha=0.5)
-    print(initial_guess_master_list)
     for sim in range(0, n):
         total_iterations_so_far = sim + 1
 
