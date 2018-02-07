@@ -1,12 +1,11 @@
 # import block
-import tkinter
 from random import randint
 import matplotlib
 matplotlib.use('TKAgg')
 import matplotlib.pyplot as plt
 from matplotlib import style
-import numpy as np
 style.use('fivethirtyeight')
+import numpy as np
 
 def generator(n, createFile):
     # Called from the main() function in MHPSim.py
@@ -14,6 +13,7 @@ def generator(n, createFile):
     fig = plt.figure()  # initializes the overall plot
     mng = plt.get_current_fig_manager() # used to make the figure apppear in full-screen mode
     mng.resize(*mng.window.maxsize())   # also used to make the figure apppear in full-screen mode
+    fig.canvas.set_window_title('Monty Hall Simulator')
     figA = plt.subplot2grid((1, 7), (0, 0), rowspan=1, colspan=4) # figA is the simulation outcome plot
     figA.set_title("Outcome of Simulations\n")
     figA.set_xlabel("Number of Simulations")
@@ -72,7 +72,7 @@ def generator(n, createFile):
             stayed_outcome_tally_list.append(stayed_outcome_tally)
         figA.scatter(total_iterations_so_far, stayed_outcome_tally_list[sim]*100, color='red')
         figA.scatter(total_iterations_so_far, switched_outcome_tally_list[sim]*100, color='blue')
-
+        plt.pause(0.001)
     figA.plot([ x for x in range(1, (n+1))], [ (y*100) for y in stayed_outcome_tally_list ], color='red', label='Always Stay')
     figA.plot([ x for x in range(1, (n+1))], [ (y*100) for y in switched_outcome_tally_list ], color='blue', label='Always Switch')
     figA.legend(loc='best')
