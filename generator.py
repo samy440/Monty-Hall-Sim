@@ -58,6 +58,7 @@ def generator(n, createFile):
         car_door_distribution_at_sim = np.array(car_door_distribution)
         for rect, h in zip(rects, car_door_distribution_at_sim):
             rect.set_height(h)
+            
         fig.canvas.draw()
 
         revealable_doors = [ x for x in [0,1,2] if ((x != car_location_list[sim]) and (x != initial_guess_list[sim])) ]
