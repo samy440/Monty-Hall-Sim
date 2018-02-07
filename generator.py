@@ -25,7 +25,7 @@ def generator(n, createFile):
     figB.set_ylabel("Frequency of Car Location Over " + str(n) + " Simulations (%)")
     plt.ylim([0.0, 100.0])
     x_axis_bar_graph_values = [1, 2, 3]
-
+    # put this in a for-loop from 1 to number_of_players
     car_location_list = [ randint(0, 2) for i in range(n) ] # a list of n integers randomly chosen between [0, 1, 2] representing which door has the car
     initial_guess_list = [ randint(0, 2) for i in range(n) ]    # a list of n integers randomly chosen between [0, 1, 2] representing the contestant's initial door-pick
     switched_guess_list = [ ]   # a list which will be populated to contain the n integers representing the contestant's switched door-pick
