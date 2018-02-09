@@ -103,6 +103,6 @@ def multiplayer_generator(n, players, createFile):
     figA.legend(loc='best')
     plt.pause(60)
     outfile.close()
-
+    plt.ioff()
 if __name__ == '__main__':
     multiplayer_generator()
