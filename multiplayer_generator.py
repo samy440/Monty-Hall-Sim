@@ -8,9 +8,6 @@ style.use('seaborn-darkgrid')
 import numpy as np
 
 def multiplayer_generator(n, players, createFile):
-    # for debugging purposes
-    debug_list = [[],[],[]]
-    outfile=open("lookhere.txt","w")
 
     # Called from the main() function in MHPSim.py
     plt.ion()   # enables interactive mode for plots
@@ -94,15 +91,27 @@ def multiplayer_generator(n, players, createFile):
             figA.scatter(total_iterations_so_far, success_rate_master_list[p][sim]*100, color=colours_for_figA[p])
         plt.pause(0.001)
     
-
-    outfile.write(str(final_guess_master_list) + '\n')
-    outfile.write(str(initial_guess_master_list) + '\n')
     for p in range(0, len(players)):
         figA.plot( [ x for x in range(1, (n+1))], [ (y*100) for y in success_rate_master_list[p] ], color=colours_for_figA[p], label=labels_list_for_figA[p] )    
-        outfile.write(str(success_rate_master_list[p]) + '\n')
     figA.legend(loc='best')
     plt.pause(60)
-    outfile.close()
+
+    if createFile:
+        outfile = open("MHPSim outfile.txt", "w")
+        header = "Sim   Car Door    "
+        for p in range(0,(len(players)-1)):
+            pnumber = p + 1
+            initialguess = "Player#" + str(pnumber) + "_i" # 3 tabs long
+            finalguess = "Player#" + str(pnumber) + "_f"
+            successrate = "Player#" + str(pnumber) + "_csr"
+            header += initialguess + "\t" + finalguess + "\t" + successrate + "\t"
+        outfile.write(header + '\n')
+        for i in range(0,n):
+            line = "Sim#" + str((i+1)) + '\t'
+            line += str(car_location_list[i]) + '\t\t'
+
+
+        outfile.close()
 
 if __name__ == '__main__':
     multiplayer_generator()
