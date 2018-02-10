@@ -70,7 +70,7 @@ def multiplayer_generator(n, players, createFile):
                 if len(switch_guess_list) == 1:
                     final_guess_master_list[p].append(switch_guess_list[0])
                 else:
-                    rndpick = randint(0,(len(switch_guess_list)))
+                    rndpick = randint(0,(len(switch_guess_list)-1))
                     final_guess_master_list[p].append(switch_guess_list[rndpick])
                 final_guess_master_list[p].append( y for y in [0,1,2] if ((y != revealable_doors_master_list[p][monty_reveals[p]]) and (y != initial_guess_master_list[p][sim])) )
             else:
@@ -94,7 +94,7 @@ def multiplayer_generator(n, players, createFile):
     for p in range(0, len(players)):
         figA.plot( [ x for x in range(1, (n+1))], [ (y*100) for y in success_rate_master_list[p] ], color=colours_for_figA[p], label=labels_list_for_figA[p] )    
     figA.legend(loc='best')
-    plt.pause(60)
+    
 
     if createFile:
         outfile = open("MHPSim outfile.txt", "w")
@@ -114,6 +114,8 @@ def multiplayer_generator(n, players, createFile):
             line += '\n'
             outfile.write(line)
         outfile.close()
+    plt.pause(60)
+    
 
 if __name__ == '__main__':
     multiplayer_generator()
