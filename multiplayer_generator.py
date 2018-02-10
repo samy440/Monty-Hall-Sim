@@ -98,19 +98,21 @@ def multiplayer_generator(n, players, createFile):
 
     if createFile:
         outfile = open("MHPSim outfile.txt", "w")
-        header = "Sim   Car Door    "
+        header = "Sim\tCar Door\t"
         for p in range(0,(len(players)-1)):
             pnumber = p + 1
-            initialguess = "Player#" + str(pnumber) + "_i" # 3 tabs long
+            initialguess = "Player#" + str(pnumber) + "_i" 
             finalguess = "Player#" + str(pnumber) + "_f"
             successrate = "Player#" + str(pnumber) + "_csr"
             header += initialguess + "\t" + finalguess + "\t" + successrate + "\t"
         outfile.write(header + '\n')
         for i in range(0,n):
             line = "Sim#" + str((i+1)) + '\t'
-            line += str(car_location_list[i]) + '\t\t'
-
-
+            line += str(car_location_list[i]) + '\t' 
+            for p in range(0,(len(players)-1)):
+                line += str(initial_guess_master_list[p][i]) + '\t' + str(final_guess_master_list[p][i]) + '\t' + str(success_rate_master_list[p][i]) + '\t'
+            line += '\n'
+            outfile.write(line)
         outfile.close()
 
 if __name__ == '__main__':

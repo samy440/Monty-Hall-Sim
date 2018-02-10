@@ -31,7 +31,7 @@ def main():
             valid_input_prob_for_this_player = intInput(input_prob_for_this_player)
         list_of_player_switch_probabilities.append(valid_input_prob_for_this_player)
     
-    multiplayer_generator.multiplayer_generator(valid_input_n, list_of_player_switch_probabilities, False)
+    multiplayer_generator.multiplayer_generator(valid_input_n, list_of_player_switch_probabilities, True)
     print("\n\tDone")
 
 def intInput(inp):
