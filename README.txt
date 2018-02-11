@@ -1,11 +1,19 @@
-This serves as a Monty Hall Problem simulator. 
+This program serves as a Monty Hall Problem simulator. 
+I used it as a hands-on way to become familiar with matplotlib
+and with some basic elements of interactive plotting (the latter
+might come in very handy when I start with machine learning 
+projects).
 Here's an overview of the way it works:
 
 MHPSim.py
     Input:
         None
     Tasks:
-        Handles I/O (asks for the number of iterations, where an iteration is a single Monty Hall Problem).
+        Handles I/O:
+            Asks for the number of iterations (where an iteration is a single Monty Hall Problem).
+            Asks for the number (1 to 9, inclusive) of independent players to simulate.
+            Asks for the rate at which every individual player decides to switch its guess (as a percentage value).
+            Can always hit the 'q' key to exit the program.
         Calls generator.py to set up the temporary data files.
 
 generator.py
